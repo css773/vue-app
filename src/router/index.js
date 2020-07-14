@@ -20,17 +20,54 @@ export default new Router({
     {
       path: '/admin',
       name: 'AdminPage',
-      component: AdminPage
+      component: AdminPage,
+      children: [
+        {
+          path: 'addOrder'
+          // component: AddOrder
+        },
+        {
+          path: 'modifyOrder'
+        },
+        {
+          path: 'storageCheck'
+        },
+        {
+          path: 'validateOrder'
+        },
+        {
+          path: 'queryOrder'
+        }
+      ]
     },
     {
       path: '/client',
       name: 'ClientPage',
-      component: ClientPage
+      component: ClientPage,
+      children: [{
+        path: 'addOrder'
+      },
+      {
+        path: 'modifyOrder'
+      },
+      {
+        path: 'queryOrder'
+      }
+      ]
     },
     {
       path: '/delegant',
       name: 'DelegantPage',
-      component: DelegantPage
+      component: DelegantPage,
+      children: [{
+        path: 'validateOrder'
+      },
+      {
+        path: 'queryOrder'
+      },
+      {
+        path: 'storageCheck'
+      }]
     }
   ]
 })
