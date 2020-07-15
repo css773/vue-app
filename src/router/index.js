@@ -5,6 +5,7 @@ import AdminPage from '@/components/admin/AdminPage'
 import ClientPage from '@/components/client/ClientPage'
 import DelegantPage from '@/components/delegant/DelegantPage'
 import Login from '@/components/Login'
+import QueryOrder from '@/components/Admin/QueryOrder'
 
 Vue.use(Router)
 
@@ -18,7 +19,7 @@ export default new Router({
       component: Login
     },
     {
-      path: '/admin',
+      path: '/admin/:id',
       name: 'AdminPage',
       component: AdminPage,
       children: [
@@ -36,12 +37,13 @@ export default new Router({
           path: 'validateOrder'
         },
         {
-          path: 'queryOrder'
+          path: 'queryOrder',
+          component: QueryOrder
         }
       ]
     },
     {
-      path: '/client',
+      path: '/client/:id',
       name: 'ClientPage',
       component: ClientPage,
       children: [{
@@ -56,7 +58,7 @@ export default new Router({
       ]
     },
     {
-      path: '/delegant',
+      path: '/delegant/:id',
       name: 'DelegantPage',
       component: DelegantPage,
       children: [{

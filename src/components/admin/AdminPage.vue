@@ -43,7 +43,7 @@ export default {
 
       }).then(() => {
         sessionStorage.removeItem('user');
-        that.$router.push('/login')
+        that.$router.push('/')
       }).catch(err=>{
         console.error(err);
       })
