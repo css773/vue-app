@@ -1,5 +1,4 @@
 <!--订单表格区域-->
-
 <template>
   <div>
     <!--卡片视图区域-->
@@ -13,7 +12,6 @@
           <el-tag type="success" v-else>已付款</el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="是否发货" prop="is_send"></el-table-column>
       <el-table-column label="下单时间" prop="create_time" width="140px">
         <template slot-scope="scope">
           <!--通过作用域插槽的形式 调用时间过滤器-->
@@ -63,7 +61,7 @@ export default {
   },
   methods: {
     async getOrderList() {
-      const { data: res } = await this.$http.get('orders', {
+      const { data: res } = await this.$axios.get('orders', {
         params: this.queryInfo
       })
       if (res.meta.status !== 200) {
@@ -72,7 +70,17 @@ export default {
       // console.log(res)
       this.orderList = res.data.goods;
       this.total = res.data.total;
-    }
+    },
+    // 监听 pageSize 改变的事件
+    handleSizeChange(newSize) {
+      this.queryInfo.pagesize = newSize
+      this.getOrderList()
+},
+// 监听 当前页码值 改变的事件
+    handleCurrentChange(newPage) {
+      this.queryInfo.pagenum = newPage
+      this.getOrderList()
+}
   }
 }
 </script>
