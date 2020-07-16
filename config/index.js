@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api':{
-        target:'http://localhost:8443',
+        target: 'http://192.168.18.53/WebSaleSystem/webservice/WebService.asmx',
         changeOrigin:true,
         pathRewrite:{
           '^/api':''
