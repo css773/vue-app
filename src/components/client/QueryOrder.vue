@@ -24,25 +24,6 @@
           <el-button type="primary" size="mini" icon="el-icon-edit"></el-button>
         </template>
       </el-table-column>
-      <!--提示框 + 按钮-->
-<el-button class="btnAdd" type="primary" @click="dialogVisible = true">新增订单</el-button>
-<el-dialog title="新增自提点：" :visible.sync="dialogVisible" width="35%" :before-close="handleClose">
- <el-form  label-width="90px" :label-position="labelPosition">
-     <el-form-item label="订单编号">
-         <el-input v-model="input.name"></el-input>
-     </el-form-item>
-     <el-form-item label="订单详情">
-        <el-input v-model="input.address"></el-input>
-     </el-form-item>
-     <el-form-item label="自提点电话">
-        <el-input v-model="input.phone"></el-input>
-     </el-form-item>
-   </el-form>
-   <span slot="footer" class="dialog-footer">
-     <el-button @click="dialogVisible = false">取 消</el-button>
-     <el-button type="primary" @click="dialogVisible = false;branchAdd()">确 定</el-button>
-    </span>
-</el-dialog>
     </el-table>
 
     <!--分页区域-->
