@@ -24,26 +24,23 @@
           <el-button type="primary" size="mini" icon="el-icon-edit"></el-button>
         </template>
       </el-table-column>
-      <!--提示框 + 按钮-->
-<el-button class="btnAdd" type="primary" @click="dialogVisible = true">新增订单</el-button>
-<el-dialog title="新增自提点：" :visible.sync="dialogVisible" width="35%" :before-close="handleClose">
- <el-form  label-width="90px" :label-position="labelPosition">
+    </el-table>
+    <!--提示框 + 按钮-->
+     <el-button class="btnAdd" type="primary" @click="dialogVisible = true">新增订单</el-button>
+<el-dialog title="新增订单：" :visible.sync="dialogVisible" width="35%" >
+ <el-form  label-width="90px">
      <el-form-item label="订单编号">
-         <el-input v-model="input.name"></el-input>
+         <el-input v-model="addOrderForm.number"></el-input>
      </el-form-item>
      <el-form-item label="订单详情">
-        <el-input v-model="input.address"></el-input>
-     </el-form-item>
-     <el-form-item label="自提点电话">
-        <el-input v-model="input.phone"></el-input>
+        <el-input v-model="addOrderForm.details"></el-input>
      </el-form-item>
    </el-form>
    <span slot="footer" class="dialog-footer">
      <el-button @click="dialogVisible = false">取 消</el-button>
-     <el-button type="primary" @click="dialogVisible = false;branchAdd()">确 定</el-button>
+     <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
     </span>
 </el-dialog>
-    </el-table>
 
     <!--分页区域-->
     <el-pagination
@@ -71,8 +68,13 @@ export default {
         pagenum: 1,
         pagesize: 10
       },
+      addOrderForm:{
+          name:Number,
+          details:''
+      },
       orderList: [], // 订单列表
-      total: 0 // 订单总数
+      total: 0, 
+      dialogVisible: false // 订单总数
     };
   },
   created() {
@@ -95,6 +97,7 @@ export default {
       this.queryInfo.pagesize = newSize
       this.getOrderList()
 },
+
 // 监听 当前页码值 改变的事件
     handleCurrentChange(newPage) {
       this.queryInfo.pagenum = newPage
