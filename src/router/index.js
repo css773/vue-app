@@ -41,7 +41,7 @@ export default new Router({
       ]
     },
     {
-      path: '/client/:id',
+      path: '/client',
       name: 'ClientPage',
       component: ClientPage,
       children: [{
@@ -56,7 +56,7 @@ export default new Router({
       ]
     },
     {
-      path: '/delegant/:id',
+      path: '/delegant',
       name: 'DelegantPage',
       component: DelegantPage,
       children: [{

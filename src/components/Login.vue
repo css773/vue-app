@@ -3,8 +3,8 @@
   <el-form :model="loginForm" :rules="rules" class="login-container" label-position="left"
            label-width="0px">
     <h3 class="login_title">系统登录</h3>
-    <el-form-item prop="username">
-      <el-input type="text" v-model="loginForm.username"
+    <el-form-item prop="user">
+      <el-input type="text" v-model="loginForm.user"
                 auto-complete="off" placeholder="账号" ></el-input>
     </el-form-item>
     <el-form-item prop="password">
@@ -34,12 +34,12 @@ export default {
   data () {
     return {
       loginForm: {
-        username: '',
+        user: '',
         password: ''
       },
       responseResult: '',
       rules: {
-        username: [{
+        user: [{
           required: true, message: '请输入用户名', trigger: 'blur'
         }],
         password: [{
@@ -51,24 +51,33 @@ export default {
   },
   methods: {
     handleClick () {
+      if(this.loginForm.user === '' || this.loginForm.password ===''){
+        alert('账号密码不能为空')
+      }else{
       this.$axios
-        .post('/login', {
-          username: this.loginForm.username,
+        .post('/UserPassword', {
+          user: this.loginForm.user,
           password: this.loginForm.password
         })
         .then(response => {
-          if (response.data.code === 200 && response.data.user.type === 'admin') {
+          console.log('reponse data',response.data);
+          console.log("stutas",response.data.stutas);
+          if (response.status === 200 && response.data.stutas === '2') {
             sessionStorage.setItem('user', JSON.stringify(user));
-            this.$router.replace({ path: '/admin' })
-          } else if(response.data.code === 200 && response.data.user.type === 'user'){
+            this.$router.push({name: '/admin',params:{ id:response.data.id}});
+          } else if(response.status === 200 && response.data.stutas === '1'){
             sessionStorage.setItem('user', JSON.stringify(user));
-            this.$router.replace({path:'/user'})
-          } else if(response.data.code === 200 && response.data.user.type === 'delegant'){ 
+            this.$router.push({name: '/client',params:{ id:response.data.id}});
+            console.log("id",response.data.id);
+          } else if(response.status === 200 && response.data.stutas === '0'){ 
             sessionStorage.setItem('user', JSON.stringify(user));
-            this.$router.replace({path:'/delegant'})
+            this.$router.push({name: '/delegant',params:{ id:response.data.id}});
+          }else {
+            alert('账号密码错误');
           }
         })
         .catch(failResponse => {})
+      }
     },
     forgetPassword() {
       this.$alert('请联系系统管理员找回密码',{

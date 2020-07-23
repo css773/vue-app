@@ -4,26 +4,8 @@
     <!--卡片视图区域-->
     <el-table :data="orderList" border stripe>
       <el-table-column type="index" label="#"></el-table-column>
-      <el-table-column label="订单编号" prop="order_number" width="300px"></el-table-column>
+      <el-table-column label="条目编号" prop="order_number" width="300px"></el-table-column>
       <el-table-column label="订单价格" prop="order_price"></el-table-column>
-      <el-table-column label="是否付款" prop="pay_status">
-        <template slot-scope="scope">
-          <el-tag type="danger" v-if="scope.row.pay_status === '0'">未付款</el-tag>
-          <el-tag type="success" v-else>已付款</el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column label="下单时间" prop="create_time" width="140px">
-        <template slot-scope="scope">
-          <!--通过作用域插槽的形式 调用时间过滤器-->
-          {{scope.row.create_time | dateFormat}}
-        </template>
-      </el-table-column>
-      <el-table-column label="操作">
-        <template slot-scope="scope">
-          <!--修改按钮-->
-          <el-button type="primary" size="mini" icon="el-icon-edit"></el-button>
-        </template>
-      </el-table-column>
     </el-table>
 
     <!--分页区域-->
