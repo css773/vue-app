@@ -56,18 +56,9 @@ export default new Router({
       ]
     },
     {
-      path: '/delegant',
+      path: '/daibiao/:id',
       name: 'DelegantPage',
-      component: DelegantPage,
-      children: [{
-        path: 'validateOrder'
-      },
-      {
-        path: 'queryOrder'
-      },
-      {
-        path: 'storageCheck'
-      }]
+      component: DelegantPage
     }
   ]
 })
