@@ -7,7 +7,6 @@
       <el-main>
         <el-row :gutter="20">
           <el-col :span="6">
-            <router-link to="/admin/addOrder">订单录入</router-link>
             <router-link to="/admin/queryOrder">订单查询</router-link>
             <router-link to="/admin/storageQuery">库存查询</router-link>
             <div>

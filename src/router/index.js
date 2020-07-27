@@ -6,6 +6,7 @@ import ClientPage from '@/components/client/ClientPage'
 import DelegantPage from '@/components/delegant/DelegantPage'
 import Login from '@/components/Login'
 import QueryOrder from '@/components/admin/QueryOrder'
+import StorageCheck from '@/components/admin/StorageCheck'
 
 Vue.use(Router)
 
@@ -24,14 +25,11 @@ export default new Router({
       component: AdminPage,
       children: [
         {
-          path: 'addOrder'
-          // component: AddOrder
-        },
-        {
           path: 'modifyOrder'
         },
         {
-          path: 'storageCheck'
+          path: 'storageCheck',
+          component: StorageCheck
         },
         {
           path: 'validateOrder'
@@ -43,7 +41,7 @@ export default new Router({
       ]
     },
     {
-      path: '/client/:id',
+      path: '/client',
       name: 'ClientPage',
       component: ClientPage,
       children: [{
@@ -58,18 +56,9 @@ export default new Router({
       ]
     },
     {
-      path: '/delegant/:id',
+      path: '/daibiao/:id',
       name: 'DelegantPage',
-      component: DelegantPage,
-      children: [{
-        path: 'validateOrder'
-      },
-      {
-        path: 'queryOrder'
-      },
-      {
-        path: 'storageCheck'
-      }]
+      component: DelegantPage
     }
   ]
 })
