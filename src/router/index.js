@@ -5,8 +5,8 @@ import AdminPage from '@/components/admin/AdminPage'
 import ClientPage from '@/components/client/ClientPage'
 import DelegantPage from '@/components/delegant/DelegantPage'
 import Login from '@/components/Login'
-import QueryOrder from '@/components/admin/QueryOrder'
-import StorageCheck from '@/components/admin/StorageCheck'
+import QueryOrder from '@/components/delegant/QueryOrder'
+import ValidateOrder from '@/components/delegant/validateOrder'
 
 Vue.use(Router)
 
@@ -28,10 +28,6 @@ export default new Router({
           path: 'modifyOrder'
         },
         {
-          path: 'storageCheck',
-          component: StorageCheck
-        },
-        {
           path: 'validateOrder'
         },
         {
@@ -41,7 +37,7 @@ export default new Router({
       ]
     },
     {
-      path: '/client',
+      path: '/client/:id',
       name: 'ClientPage',
       component: ClientPage,
       children: [{
@@ -57,8 +53,20 @@ export default new Router({
     },
     {
       path: '/daibiao/:id',
-      name: 'DelegantPage',
-      component: DelegantPage
+      // name: 'DelegantPage',
+      component: DelegantPage,
+      children: [{
+        path: 'queryOrder',
+        component: QueryOrder
+      },
+      {
+        path: 'validateOrder',
+        component: ValidateOrder
+      }]
+    },
+    {
+      path: '/queryOrder',
+      component: QueryOrder
     }
   ]
 })

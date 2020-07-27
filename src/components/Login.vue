@@ -79,24 +79,28 @@ export default {
           .then((response) => {
             const responseObject = JSON.parse(response.data.d);
             console.log("responseObject", responseObject);
-            console.log("user", responseObject.userName);
+            console.log("username", responseObject.username);
+            console.log("userid", responseObject.userid);
             if (responseObject.stutas == 2) {
               this.$router.push({
                 name: "/admin",
                 params: { id: responseObject.userid },
               });
-            } else if (responseObject.stutas == 1) {
+            }else if(responseObject.stutas == 1){
+               sessionStorage["user"] = JSON.stringify('user');
+               sessionStorage['pathid'] = responseObject.userid;
+              let clientId = responseObject.userid
+              this.$router.push({
+                path: `/client/${clientId}`
+              });
+            }else if (responseObject.stutas == 0) {
               sessionStorage["user"] = JSON.stringify('user');
+              sessionStorage['pathid'] = responseObject.userid;
               let delegantId = responseObject.userid;
               this.$router.push({
                 path: `/daibiao/${delegantId}`,
               });
-            } else if (responseObject.stutas == 0) {
-              this.$router.push({
-                name: "/client",
-                params: { id: responseObject.userid },
-              });
-            } else {
+            }else {
               alert("账号密码错误11");
             }
           })
