@@ -5,7 +5,7 @@
       </el-header>
       <el-main>
         <div>
-  <router-link to="{name:'queryOrder',params:{id:'user.id'}}" >订单查看</router-link>
+  <router-link to=queryOrder >订单查看</router-link>
   <router-link to="validateOrder">订单确认</router-link>
 </div>
 <router-view></router-view>
@@ -33,7 +33,7 @@
       };
     },
     mounted:function(){
-      this.user.id = sessionStorage.getItem("pathid");
+      this.userId = sessionStorage.getItem("pathid");
     },
     methods: {
       handleClick(tab, event) {

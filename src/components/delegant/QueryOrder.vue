@@ -1,15 +1,15 @@
 <template>
-<el-form ref="form" :model="form" label-width="80px" size="small">
+<el-form ref="form" :model="form" label-width="80px" size="medium">
   <el-page-header @back="goBack" content="订单查询">
 </el-page-header>
   <el-form-item label="订单编号" label-width="left">
-    <el-input type="textarea" v-model="form.desc"></el-input>
+    <el-input type="textarea" v-model="form.billNumber"></el-input>
   </el-form-item>
   <el-form-item label="录入人" label-width="left">
-    <el-input type="textarea" v-model="form.desc"></el-input>
+    <el-input type="textarea" v-model="form.commander"></el-input>
   </el-form-item>
   <el-form-item label="订单状态" label-width="left" >
-    <el-select v-model="form.region" placeholder="未选择">
+    <el-select v-model="form.status" placeholder="未选择">
       <el-option label="未完成" value="unfinished"></el-option>
       <el-option label="部分完成" value="partFinished"></el-option>
       <el-option label="已完成" value="Finished"></el-option>
@@ -17,14 +17,11 @@
     </el-select>
   </el-form-item>
   <el-form-item label="货品" label-width="left">
-    <el-input type="textarea" v-model="form.desc"></el-input>
+    <el-input type="textarea" v-model="form.goods"></el-input>
   </el-form-item>
   <el-form-item label="客户" label-width="left">
-     <el-select v-model="form.region" placeholder="全部">
-      <el-option label="未完成" value="unfinished"></el-option>
-      <el-option label="部分完成" value="partFinished"></el-option>
-      <el-option label="已完成" value="Finished"></el-option>
-      <el-option label="待配货" value="WaitingDispatch"></el-option>
+     <el-select v-model="form.clientData" @change="selectChange" placeholder="全部">
+      <el-option v-for="client in clients" label="client.name" :key="client.name" :value="client.name"></el-option>
     </el-select>
   </el-form-item>
   <el-form-item label="时间">
@@ -49,14 +46,14 @@
     data() {
       return {
         form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
+          billNumber: '',
+          commander: '',
+          status: '',
+          goods: '',
           delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
+          client: [],
+          date1:'',
+          date2:''
         }
       }
     },
